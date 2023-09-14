@@ -5,5 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Validation with JS</title>
   </head>
-  <body></body>
+  <body>
+    <form class="form" novalidate autocomplete="off">
+      <div class="form-field">
+        <label for="email">E-mail:</label>
+        <input class="input-field" type="email" name="email" id="email" />
+        <span class="feedback" aria-live="polite"></span>
+      </div>
+      <div class="form-field">
+        <label for="country">Country:</label>
+        <input class="input-field" type="text" name="country" id="country" />
+        <span class="feedback" aria-live="polite"></span>
+      </div>
+      <div class="form-field">
+        <label for="zip-code">ZIP Code:</label>
+        <input class="input-field" type="text" name="zip-code" id="zip-code" />
+        <span class="feedback" aria-live="polite"></span>
+      </div>
+      <div class="form-field">
+        <label for="password">Password:</label>
+        <input
+          class="input-field"
+          type="password"
+          name="password"
+          id="password"
+        />
+        <span class="feedback" aria-live="polite"></span>
+      </div>
+      <div class="form-field">
+        <label for="password-confirm">Password Confirm:</label>
+        <input
+          class="input-field"
+          type="password"
+          name="password-confirm"
+          id="password-confirm"
+        />
+        <span class="feedback" aria-live="polite"></span>
+      </div>
+      <menu>
+        <li><button>Register</button></li>
+      </menu>
+    </form>
+  </body>
 </html>
