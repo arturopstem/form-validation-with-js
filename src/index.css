@@ -110,3 +110,39 @@ button:hover {
 .error + .feedback {
   color: var(--error);
 }
+
+.result-modal {
+  margin: revert;
+  border: none;
+  background: none;
+}
+
+.result-modal::backdrop {
+  background-color: rgb(28, 27, 34, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.result-form {
+  background-color: rgb(43, 42, 51);
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.result-message {
+  text-align: center;
+}
+
+.result-message.success {
+  color: var(--success);
+}
+
+.result-message.error {
+  color: var(--error);
+}
+
+.result-image {
+  width: 100%;
+  border-radius: 0.5rem;
+}

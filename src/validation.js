@@ -201,6 +201,9 @@ function displayFeedbackMsg(inputElement) {
     default:
   }
   feedbackMsg.innerHTML = feedbackFunction(inputElement);
+  if (!isValid(inputElement)) {
+    feedbackMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
 }
 
 function displayFeedback(inputElement) {
@@ -215,4 +218,4 @@ function clearFeedback(inputElement) {
   const feedbackMsg = element.nextElementSibling;
   feedbackMsg.textContent = '';
 }
-export { displayFeedback, clearFeedback };
+export { displayFeedback, clearFeedback, isValid };

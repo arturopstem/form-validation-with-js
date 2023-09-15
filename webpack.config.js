@@ -18,6 +18,10 @@ const config = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
+      {
+        test: /\.(jpg|gif)$/,
+        type: 'asset/resource',
+      },
     ],
   },
 
