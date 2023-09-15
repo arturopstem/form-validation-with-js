@@ -204,6 +204,7 @@ function displayFeedbackMsg(inputElement) {
   if (!isValid(inputElement)) {
     feedbackMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
+  feedbackMsg.classList.add('show');
 }
 
 function displayFeedback(inputElement) {
@@ -217,5 +218,6 @@ function clearFeedback(inputElement) {
   element.classList.remove('success', 'error');
   const feedbackMsg = element.nextElementSibling;
   feedbackMsg.textContent = '';
+  feedbackMsg.classList.remove('show');
 }
 export { displayFeedback, clearFeedback, isValid };

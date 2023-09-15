@@ -73,7 +73,7 @@ svg {
   width: 250px;
   font-size: 1.25rem;
   display: grid;
-  grid-template-rows: repeat(3, min-content);
+  grid-auto-rows: min-content;
   gap: 0.125rem;
 }
 
@@ -111,6 +111,11 @@ svg {
   grid-row: 3/4;
   margin-top: 0.25rem;
   font-size: 1rem;
+  display: none;
+}
+
+.feedback.show {
+  display: revert;
 }
 
 .success + .feedback {
