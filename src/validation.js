@@ -203,6 +203,11 @@ function displayFeedbackMsg(inputElement) {
   feedbackMsg.innerHTML = feedbackFunction(inputElement);
 }
 
+function displayFeedback(inputElement) {
+  displayFeedbackBorder(inputElement);
+  displayFeedbackMsg(inputElement);
+}
+
 function clearFeedback(inputElement) {
   const element = inputElement;
   element.value = '';
@@ -210,4 +215,4 @@ function clearFeedback(inputElement) {
   const feedbackMsg = element.nextElementSibling;
   feedbackMsg.textContent = '';
 }
-export { displayFeedbackBorder, displayFeedbackMsg, clearFeedback };
+export { displayFeedback, clearFeedback };
