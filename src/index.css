@@ -40,7 +40,7 @@ menu {
   text-align: center;
 }
 
-button {
+.form-submit-btn {
   appearance: none;
   color: rgb(0, 221, 255);
   border: 0.25rem solid currentColor;
@@ -52,7 +52,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.form-submit-btn:hover {
   background-color: rgb(43, 42, 51);
 }
 
