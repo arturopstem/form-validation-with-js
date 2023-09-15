@@ -22,6 +22,10 @@ const config = {
         test: /\.(jpg|gif)$/,
         type: 'asset/resource',
       },
+      {
+        test: /\.svg$/,
+        type: 'asset/source',
+      },
     ],
   },
 

@@ -1,6 +1,10 @@
 import './index.css';
 import showModal from './modal';
 import { clearFeedback, displayFeedback, isValid } from './validation';
+import initViewPasswordBtn from './view-password';
+
+const viewPasswordBtns = document.querySelectorAll('.view-password-btn');
+viewPasswordBtns.forEach((btn) => initViewPasswordBtn(btn));
 
 const form = document.querySelector('.form');
 
