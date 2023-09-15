@@ -32,8 +32,7 @@ body {
   min-height: 100svh;
   background-color: rgb(28, 27, 34);
   display: grid;
-  justify-content: center;
-  align-items: start;
+  place-content: center;
 }
 
 menu {

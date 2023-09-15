@@ -17,17 +17,44 @@ function isValidZIPCode(rawZIPCode) {
   return zipRegExp.test(zipCode);
 }
 
+function isValidPassword(password) {
+  const number = /[0-9]/.test(password);
+  const upperCase = /[A-Z]/.test(password);
+  const lowerCase = /[a-z]/.test(password);
+  const symbol = /[!-/:-@[-`{-~]/.test(password);
+  const containsAtLeastOne = number && lowerCase && upperCase && symbol;
+  const passwordRegExp = /^[ -~]{8,}$/;
+  return passwordRegExp.test(password) && containsAtLeastOne;
+}
+
+function isValidPasswordConfirm(passwordConfirm) {
+  const password = document.querySelector('input[name="password"]').value;
+  const passwordValid = isValidPassword(password);
+  const passwordConfirmValid = isValidPassword(passwordConfirm);
+  return passwordConfirm === password && passwordConfirmValid && passwordValid;
+}
+
 function isValid(inputElement) {
-  if (inputElement.name === 'email') {
-    return isValidEmail(inputElement.value);
+  let validFunction;
+  switch (inputElement.name) {
+    case 'email':
+      validFunction = isValidEmail;
+      break;
+    case 'country':
+      validFunction = isValidCountry;
+      break;
+    case 'zip-code':
+      validFunction = isValidZIPCode;
+      break;
+    case 'password':
+      validFunction = isValidPassword;
+      break;
+    case 'password-confirm':
+      validFunction = isValidPasswordConfirm;
+      break;
+    default:
   }
-  if (inputElement.name === 'country') {
-    return isValidCountry(inputElement.value);
-  }
-  if (inputElement.name === 'zip-code') {
-    return isValidZIPCode(inputElement.value);
-  }
-  return false;
+  return validFunction(inputElement.value);
 }
 
 function displayFeedbackBorder(inputElement) {
@@ -104,17 +131,83 @@ function getZipCodeFeedbackMsg(inputElement) {
   return msg;
 }
 
-function displayFeedbackMsg(inputElement) {
-  const feedbackMsg = inputElement.nextElementSibling;
-  if (inputElement.name === 'email') {
-    feedbackMsg.innerHTML = getEmailFeedbackMsg(inputElement);
+function getPasswordFeedbackMsg(inputElement) {
+  const { value } = inputElement;
+  let msg = '';
+  if (isValid(inputElement)) {
+    msg = '✓ Valid password';
+  } else {
+    if (value.length === 0) {
+      msg += '⨯ Input field is empty<br>';
+    } else {
+      msg += '⨯ Invalid password<br>';
+    }
+    msg += '⨯ Provide a valid password, use standard ASCII characters only<br>';
+    if (value.length < 8) {
+      msg += '⨯ It should be at least 8 characters long<br>';
+    } else {
+      if (!/[0-9]/.test(value)) {
+        msg += '⨯ It should contain at least one digit<br>';
+      }
+      if (!/[A-Z]/.test(value)) {
+        msg += '⨯ It should contain at least one upper case letter<br>';
+      }
+      if (!/[a-z]/.test(value)) {
+        msg += '⨯ It should contain at least one lower case letter<br>';
+      }
+      if (!/[!-/:-@[-`{-~]/.test(value)) {
+        msg += '⨯ It should contain at least one symbol<br>';
+      }
+    }
   }
-  if (inputElement.name === 'country') {
-    feedbackMsg.innerHTML = getCountryFeedbackMsg(inputElement);
-  }
-  if (inputElement.name === 'zip-code') {
-    feedbackMsg.innerHTML = getZipCodeFeedbackMsg(inputElement);
-  }
+  return msg;
 }
 
-export { displayFeedbackBorder, displayFeedbackMsg };
+function getPasswordConfirmFeedbackMsg(inputElement) {
+  const password = document.querySelector('input[name="password"]');
+  const { value } = inputElement;
+  let msg = '';
+  if (!isValid(password)) {
+    msg = '⨯ Enter a valid password first<br>';
+  } else if (isValid(inputElement)) {
+    msg = '✓ Password matches<br>';
+  } else if (value.length === 0) {
+    msg = '⨯ Input field is empty<br>';
+  } else {
+    msg = '⨯ It does not match the password<br>';
+  }
+  return msg;
+}
+
+function displayFeedbackMsg(inputElement) {
+  const feedbackMsg = inputElement.nextElementSibling;
+  let feedbackFunction;
+  switch (inputElement.name) {
+    case 'email':
+      feedbackFunction = getEmailFeedbackMsg;
+      break;
+    case 'country':
+      feedbackFunction = getCountryFeedbackMsg;
+      break;
+    case 'zip-code':
+      feedbackFunction = getZipCodeFeedbackMsg;
+      break;
+    case 'password':
+      feedbackFunction = getPasswordFeedbackMsg;
+      break;
+    case 'password-confirm':
+      feedbackFunction = getPasswordConfirmFeedbackMsg;
+      break;
+    default:
+  }
+  feedbackMsg.innerHTML = feedbackFunction(inputElement);
+}
+
+function clearFeedback(inputElement) {
+  const element = inputElement;
+  element.value = '';
+  element.classList.remove('success', 'error');
+  const feedbackMsg = element.nextElementSibling;
+  feedbackMsg.textContent = '';
+}
+export { displayFeedbackBorder, displayFeedbackMsg, clearFeedback };

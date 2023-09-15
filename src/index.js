@@ -1,11 +1,21 @@
 import './index.css';
-import { displayFeedbackBorder, displayFeedbackMsg } from './validation';
+import {
+  clearFeedback,
+  displayFeedbackBorder,
+  displayFeedbackMsg,
+} from './validation';
 
 const form = document.querySelector('.form');
 
 form.addEventListener('input', (e) => {
   displayFeedbackBorder(e.target);
   displayFeedbackMsg(e.target);
+  if (e.target.name === 'password') {
+    const passwordConfirm = document.querySelector(
+      'input[name="password-confirm"]',
+    );
+    clearFeedback(passwordConfirm);
+  }
 });
 
 form.addEventListener('focusout', (e) => {
